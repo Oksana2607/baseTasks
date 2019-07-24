@@ -67,7 +67,6 @@ const calculateMaxMultiplyOrSumPlusThree = (a, b, c) => {
     return sum;
 };
 
-
 // 5.Написать программу определения оценки студента по его рейтингу,
 //  на основе следующих правил
 
