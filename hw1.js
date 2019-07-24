@@ -36,7 +36,6 @@ const defineSpotPosition = (x, y) => {
 
 // 3.Найти суммы только положительных из трех чисел
 
-
 const findSumOfPositiveNumbers = (a, b, c) => {
     let sum = 0;
 
