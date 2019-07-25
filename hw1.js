@@ -575,3 +575,188 @@ const findDistanceBetweenPoints = (x1, y1, x2, y2) => {
 
     return distance;
 };
+
+// Доп. задание
+
+// 0. Найти два наименьших элемента массива
+
+const findTwoSmallestEllements = arr => {
+    let temp = 0;
+    let min = 0;
+    let min1 = 0;
+
+    if (arr.length <= 1) {
+        return arr;
+    }
+
+    if (arr[0] < arr[1]) {
+        min = arr[0];
+        min1 = arr[1];
+    } else {
+        min = arr[1];
+        min1 = arr[0];
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < min1 && arr[i] < min) {
+            temp = min;
+            min = arr[i];
+            min1 = temp;
+        } else if (arr[i] > min && arr[i] < min1) {
+            min1 = arr[i];
+        }
+    }
+
+    return [min, min1];
+};
+
+// 1. Найти среднее арифметическое элементов массива
+
+const findAverageOfElements = arr => {
+    let sum = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+
+    return sum / arr.length;
+};
+
+// 2. Найти максимальные элементы столбцов матрицы
+
+const findMaxElementsOfMatrix = arr => {
+    if (arr.length < 1) {
+        return null;
+    }
+
+    let result = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        let max = 0;
+        for (let j = 0; j < arr[i].length; j++) {
+            if (arr[i][j] > max) {
+                max = arr[i][j];
+            }
+        }
+        result[result.length] = max;
+    }
+
+    return result;
+};
+
+// 3. Разложить положительные и отрицательные элементы по разным массивам
+
+const spreadPositiveAndNegativeElementsOfArray = arr => {
+    let positive = [];
+    let negative = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] > 0) {
+            positive[positive.length] = arr[i];
+        } else {
+            negative[negative.length] = arr[i];
+        }
+    }
+
+    return [positive, negative];
+};
+
+// --4. Представить натуральное число в виде простых сомножителей
+
+const presentNumberAsPrimeFactors = num => {
+
+};
+
+console.log(presentNumberAsPrimeFactors(18));
+
+// 5. Посчитать количество простых чисел в массиве
+
+const calculatePrimeNumbers = arr => {
+    let count = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        if (checkPrimeNumber(arr[i])) {
+            count++;
+        }
+    }
+
+    return count;
+};
+
+const checkPrimeNumber = num => {
+    for (let i = 2; i < num; i++) {
+        if (num % i === 0) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+// 6. Посчитать количество вхождений цифры в числе
+
+const countNumberOfDigitOccurrence = num => {
+    let digit = 0;
+    let arrCount = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let result = `Number ${num} consists of `;
+
+    while (num) {
+        digit = num % 10;
+        num = (num - digit) / 10;
+        arrCount[digit] += 1;
+    }
+
+    for (let i = 0; i < arrCount.length; i++) {
+        if (arrCount[i]) {
+            result += `'${i}': ${arrCount[i]} times; `;
+        }
+    }
+
+    return result;
+};
+
+// 7. Определить абсолютное значение разницы сумм диагоналей квадратной матрицы
+
+const getDifferenceOfMatrixDiagonals = arr => {
+    let result = 0;
+    let l = arr.length - 1;
+
+    if (arr.length < 1) {
+        return null;
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+        result += arr[i][i] - arr[i][l - i];
+    }
+
+    if (result < 0) return -result;
+
+    return result;
+};
+
+// 8. Определить, принадлежит ли число последовательности Фибоначчи
+
+const checkNumberBelongToFibonacci = num => {
+    let result = 0;
+    let n1 = 1;
+    let n2 = 1;
+    while (result <= num) {
+        result = n1 + n2;
+        n1 = n2;
+        n2 = result;
+
+        if (result === num) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+console.log(checkNumberBelongToFibonacci(55));
+console.log(checkNumberBelongToFibonacci(8));
+console.log(checkNumberBelongToFibonacci(13));
+console.log(checkNumberBelongToFibonacci(524));
+
+// 9. Напишите функцию, которая принимает список неотрицательных целых чисел, упорядочивает их так,
+// чтобы они составляли максимально возможное число. [0, 1, 2, 3] => 3210
