@@ -661,12 +661,28 @@ const spreadPositiveAndNegativeElementsOfArray = arr => {
     return [positive, negative];
 };
 
-// --4. Представить натуральное число в виде простых сомножителей
+// 4. Представить натуральное число в виде простых сомножителей
 
 const presentNumberAsPrimeFactors = num => {
+    let i = 2;
+    let j = 0;
+    let result = [];
 
+    while (i < num) {
+        if (num % i === 0) {
+            result[j] = i;
+            console.log(result);
+            j++;
+            num = num / i;
+        } else {
+            i++;
+        }
+        result[j] = i;
+
+    }
+
+    return result;
 };
-
 console.log(presentNumberAsPrimeFactors(18));
 
 // 5. Посчитать количество простых чисел в массиве
@@ -753,10 +769,37 @@ const checkNumberBelongToFibonacci = num => {
     return false;
 };
 
-console.log(checkNumberBelongToFibonacci(55));
-console.log(checkNumberBelongToFibonacci(8));
-console.log(checkNumberBelongToFibonacci(13));
-console.log(checkNumberBelongToFibonacci(524));
-
 // 9. Напишите функцию, которая принимает список неотрицательных целых чисел, упорядочивает их так,
 // чтобы они составляли максимально возможное число. [0, 1, 2, 3] => 3210
+
+const receiveMaxNumber = arr => {
+  let result = 0;
+  
+  sortBubble(arr);
+  
+  for (let i = 0; i < arr.length - 1; i++) {    
+    result = (result + arr[i]) * 10;     
+  }
+  
+  return result; 
+}
+
+const sortBubble = arr => {
+    let temp = 0;
+
+    if (arr.length < 1) {
+        return arr;
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j] < arr[j+1]) {
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+
+    return arr;
+};
