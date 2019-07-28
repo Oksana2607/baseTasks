@@ -4,7 +4,7 @@
 const calculateMultiplyOrSum = (a, b) => {
     let result = 0;
 
-    if (a % 2 === 0) {
+    if (!(a % 2)) {
         result = a * b;
     } else {
         result = a + b;
@@ -40,7 +40,7 @@ const findSumOfPositiveNumbers = (a, b, c) => {
     let sum = 0;
 
     if (a > 0) {
-        sum = a;
+        sum += a;
     }
 
     if (b > 0) {
@@ -57,14 +57,14 @@ const findSumOfPositiveNumbers = (a, b, c) => {
 // 4.Посчитать выражение макс(а*б*с, а+б+с)+3
 
 const calculateMaxMultiplyOrSumPlusThree = (a, b, c) => {
-    let mult = (a * b * c) + 3;
-    let sum = a + b + c + 3;
+    let mult = a * b * c;
+    let sum = a + b + c;
 
     if (mult > sum) {
-        return mult;
+        return mult + 3;
     }
 
-    return sum;
+    return sum + 3;
 };
 
 // 5.Написать программу определения оценки студента по его рейтингу,
@@ -84,30 +84,18 @@ const defineStudentGrade = rate => {
 
     if (rate >= 0 && rate < 20) {
         grade = 'F';
-    }
-
-    if (rate >= 20 && rate < 40) {
+    } else if (rate >= 20 && rate < 40) {
         grade = 'E';
-    }
-
-    if (rate >= 40 && rate < 60) {
+    } else if (rate >= 40 && rate < 60) {
         grade = 'D';
-    }
-
-    if (rate >= 60 && rate < 75) {
+    } else if (rate >= 60 && rate < 75) {
         grade = 'C';
-    }
-
-    if (rate >= 75 && rate < 90) {
+    } else if (rate >= 75 && rate < 90) {
         grade = 'B';
-    }
-
-    if (rate >= 90 && rate < 101) {
+    } else if (rate >= 90 && rate < 101) {
         grade = 'A';
-    }
-
-    if (rate < 0 || rate > 100) {
-        return 'Enter valid rate';
+    } else {
+        throw new Error('Enter valid rate');
     }
 
     return grade;
@@ -122,7 +110,7 @@ const findSumAndQuantityOfEvenNumber = num => {
     let count = 0;
 
     for (let i = 1; i <= num; i++) {
-        if (i % 2 === 0) {
+        if (!(i % 2)) {
             sum += i;
             count++;
         }
@@ -135,7 +123,7 @@ const findSumAndQuantityOfEvenNumber = num => {
 
 const checkPrimeNumber = num => {
     for (let i = 2; i < num; i++) {
-        if (num % i === 0) {
+        if (!(num % i)) {
             return false;
         }
     }
@@ -224,12 +212,18 @@ const calculateSumOfNumbers = num => {
     let sum = 0;
     let digit = 0;
 
-    if (num === 0) return 0;
+    if (!num) return 0;
 
-    while (num) {
+    while (num > 0) {
         digit = num % 10;
         sum += digit;
         num = (num - digit) / 10;
+    }
+
+    while (num < 0) {
+        digit = -(num % 10);
+        sum += digit;
+        num = (num + digit) / 10;
     }
 
     return sum;
@@ -260,11 +254,11 @@ const reverseNumber = num => {
 // 1.Найти минимальный элемент массива
 
 const findMinElement = arr => {
-    let min = 0;
-
     if (arr.length < 1) {
-        return arr;
+        return;
     }
+
+    let min = arr[0];
 
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] < min) {
@@ -278,11 +272,11 @@ const findMinElement = arr => {
 // 2.Найти максимальный элемент массива
 
 const findMaxElement = arr => {
-    let max = 0;
-
     if (arr.length < 1) {
-        return arr;
+        return;
     }
+
+    let max = arr[0];
 
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] > max) {
@@ -296,37 +290,41 @@ const findMaxElement = arr => {
 // 3.Найти индекс минимального элемента массива
 
 const findIndexOfMinElement = arr => {
-    let min = 0;
+    let min = arr[0];
+    let index = 0;
 
     if (arr.length < 1) {
-        return arr;
+        return;
     }
 
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] < min) {
             min = arr[i];
+            index = i;
         }
     }
 
-    return arr.indexOf(min);
+    return index;
 };
 
 // 4.Найти индекс максимального элемента массива
 
 const findIndexOfMaxElement = arr => {
-    let max = null;
+    let max = arr[0];
+    let index = 0;
 
     if (arr.length < 1) {
-        return arr;
+        return;
     }
 
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] > max) {
             max = arr[i];
+            index = i;
         }
     }
 
-    return arr.indexOf(max);
+    return index;
 };
 
 // 5.Посчитать сумму элементов массива с нечетными индексами
@@ -335,11 +333,15 @@ const calculateSumOfElementsWithOddIndex = arr => {
     let sum = 0;
 
     if (arr.length < 1) {
-        return arr;
+        return;
+    }
+
+    if (arr.length === 1) {
+        return arr[0];
     }
 
     for (let i = 1; i < arr.length; i += 2) {
-        sum += arr[i]
+        sum += arr[i];
     }
 
     return sum;
@@ -368,7 +370,7 @@ const calculateQuantityOfOddElements = arr => {
     let count = 0;
 
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i] % 2 !== 0) {
+        if (arr[i] % 2) {
             count++;
         }
     }
@@ -410,7 +412,7 @@ const sortBubble = arr => {
     }
 
     for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr.length; j++) {
+        for (let j = 0; j < arr.length - i; j++) {
             if (arr[j + 1] < arr[j]) {
                 temp = arr[j + 1];
                 arr[j + 1] = arr[j];
@@ -527,38 +529,21 @@ const merge = (arrFirst, arrSecond) => {
     return sortArr.concat(arrFirst.slice(i)).concat(arrSecond.slice(j));
 };
 
-
 // Функции
 
 // 1.	Получить строковое название дня недели по номеру дня.
 
 const receiveStringWeekDay = num => {
     let result = 0;
+    let day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-    switch (num) {
-        case 1:
-            result = 'Sunday';
-            break;
-        case 2:
-            result = 'Monday';
-            break;
-        case 3:
-            result = 'Tuesday';
-            break;
-        case 4:
-            result = 'Wednesday';
-            break;
-        case 5:
-            result = 'Thursday';
-            break;
-        case 6:
-            result = 'Friday';
-            break;
-        case 7:
-            result = 'Saturday';
-            break;
-        default:
-            result = 'There is not such day of the week';
+    if (num >= 1 && num <= 7) {
+        for (let i = 0; i < num; i++) {
+            result = day[i];
+        }
+    } else {
+
+        throw new Error('There is not such day of the week');
     }
 
     return result;
@@ -585,8 +570,8 @@ const findTwoSmallestEllements = arr => {
     let min = 0;
     let min1 = 0;
 
-    if (arr.length <= 1) {
-        return arr;
+    if (arr.length <= 2) {
+        return;
     }
 
     if (arr[0] < arr[1]) {
@@ -615,6 +600,10 @@ const findTwoSmallestEllements = arr => {
 const findAverageOfElements = arr => {
     let sum = 0;
 
+    if (arr.length < 1) {
+        return;
+    }
+
     for (let i = 0; i < arr.length; i++) {
         sum += arr[i];
     }
@@ -626,14 +615,17 @@ const findAverageOfElements = arr => {
 
 const findMaxElementsOfMatrix = arr => {
     if (arr.length < 1) {
-        return null;
+        return;
     }
 
     let result = [];
+    let rows = arr.length;
+    let colums = arr[0].length;
 
-    for (let i = 0; i < arr.length; i++) {
-        let max = 0;
-        for (let j = 0; j < arr[i].length; j++) {
+
+    for (let j = 0; j < colums; j++) {
+        let max = arr[0][j];
+        for (let i = 0; i < rows; i++) {
             if (arr[i][j] > max) {
                 max = arr[i][j];
             }
@@ -661,13 +653,29 @@ const spreadPositiveAndNegativeElementsOfArray = arr => {
     return [positive, negative];
 };
 
-// --4. Представить натуральное число в виде простых сомножителей
+// 4. Представить натуральное число в виде простых сомножителей
 
 const presentNumberAsPrimeFactors = num => {
+    let i = 2;
+    let j = 0;
+    let result = [];
 
+
+    while (i < num) {
+        if (num % i === 0) {
+            result[j] = i;
+            j++;
+            num = num / i;
+        } else {
+            i++;
+        }
+
+        result[j] = i;
+    }
+
+    return result;
 };
 
-console.log(presentNumberAsPrimeFactors(18));
 
 // 5. Посчитать количество простых чисел в массиве
 
@@ -683,22 +691,14 @@ const calculatePrimeNumbers = arr => {
     return count;
 };
 
-const checkPrimeNumber = num => {
-    for (let i = 2; i < num; i++) {
-        if (num % i === 0) {
-            return false;
-        }
-    }
-
-    return true;
-};
-
 // 6. Посчитать количество вхождений цифры в числе
 
 const countNumberOfDigitOccurrence = num => {
     let digit = 0;
     let arrCount = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     let result = `Number ${num} consists of `;
+
+    if (!num) return;
 
     while (num) {
         digit = num % 10;
@@ -722,7 +722,7 @@ const getDifferenceOfMatrixDiagonals = arr => {
     let l = arr.length - 1;
 
     if (arr.length < 1) {
-        return null;
+        return;
     }
 
     for (let i = 0; i < arr.length; i++) {
@@ -740,6 +740,9 @@ const checkNumberBelongToFibonacci = num => {
     let result = 0;
     let n1 = 1;
     let n2 = 1;
+
+    if (num <= 0) return;
+
     while (result <= num) {
         result = n1 + n2;
         n1 = n2;
@@ -753,10 +756,41 @@ const checkNumberBelongToFibonacci = num => {
     return false;
 };
 
-console.log(checkNumberBelongToFibonacci(55));
-console.log(checkNumberBelongToFibonacci(8));
-console.log(checkNumberBelongToFibonacci(13));
-console.log(checkNumberBelongToFibonacci(524));
-
 // 9. Напишите функцию, которая принимает список неотрицательных целых чисел, упорядочивает их так,
 // чтобы они составляли максимально возможное число. [0, 1, 2, 3] => 3210
+
+const receiveMaxNumber = arr => {
+    let result = 0;
+
+    if (arr.length < 1) return;
+
+    sortBubbleRev(arr);
+
+    for (let i = 0; i < arr.length; i++) {
+        result = (result + arr[i]) * 10;
+    }
+
+    return result / 10;
+}
+
+const sortBubbleRev = arr => {
+    let temp = 0;
+
+    if (arr.length < 1) {
+        return arr;
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j] < arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    return arr;
+};
+  
+  
